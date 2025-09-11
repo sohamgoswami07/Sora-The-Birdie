@@ -55,7 +55,7 @@ const body = Bodies.rectangle(centerX, baseY, 320, 400, {
       yScale: 1
     }
   },
-  // isStatic: true,
+  isStatic: true,
   inertia: Infinity // prevent rotation
 });
 
@@ -183,9 +183,9 @@ function oscillate(time, speed, maxAngle) {
   return Math.sin(time * speed) * maxAngle;
 }
 
-// Animate wings, tail, and legs
+// Animate wings, tail, legs, and jumping
 Events.on(engine, "beforeUpdate", () => {
-  const time = engine.timing.timestamp / 1000; // seconds
+  const time = engine.timing.timestamp / 500; // seconds
 
   // Wings flap smoothly ±45°
   const wingAngle = oscillate(time, 2, Math.PI / 6);
@@ -196,33 +196,13 @@ Events.on(engine, "beforeUpdate", () => {
   const tailAngle = oscillate(time, 1.5, Math.PI / 9);
   Body.setAngle(tail, tailAngle + Math.PI / 4);
 
+  // Body continuous jump (sinusoidal up/down)
+  const jumpHeight = 40; // pixels up/down
+  const jumpSpeed = 2;   // frequency
+  const newY = baseY + Math.sin(time * jumpSpeed) * -jumpHeight;
+  Body.setPosition(body, { x: centerX, y: newY });
+
   // Keep body upright
   Body.setAngle(body, 0);
   Body.setAngularVelocity(body, 0);
 });
-
-
-
-// Animate wings, tail, legs, and jumping
-// Events.on(engine, "beforeUpdate", () => {
-//   const time = engine.timing.timestamp / 1000; // seconds
-
-//   // Wings flap smoothly ±45°
-//   const wingAngle = oscillate(time, 2, Math.PI / 6);
-//   Body.setAngle(wingLeft, -wingAngle + Math.PI / 2);
-//   Body.setAngle(wingRight, wingAngle + Math.PI / 2);
-
-//   // Tail sways ±20°
-//   const tailAngle = oscillate(time, 1.5, Math.PI / 9);
-//   Body.setAngle(tail, tailAngle + Math.PI / 4);
-
-//   // Body continuous jump (sinusoidal up/down)
-//   const jumpHeight = 40; // pixels up/down
-//   const jumpSpeed = 2;   // frequency
-//   const newY = baseY + Math.sin(time * jumpSpeed) * -jumpHeight;
-//   Body.setPosition(body, { x: centerX, y: newY });
-
-//   // Keep body upright
-//   Body.setAngle(body, 0);
-//   Body.setAngularVelocity(body, 0);
-// });
