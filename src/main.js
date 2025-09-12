@@ -59,6 +59,32 @@ const body = Bodies.rectangle(centerX, baseY, 320, 400, {
   inertia: Infinity // prevent rotation
 });
 
+// Eyes
+const nose = Bodies.rectangle(centerX, baseY, 31, 31, {
+  // background: "#ff030a",
+  render: {
+    sprite: {
+      texture: "./figure/nose.png",
+      xScale: 1,
+      yScale: 1
+    }
+  },
+  inertia: Infinity // prevent rotation
+});
+
+// Eyes
+const eye = Bodies.rectangle(centerX, baseY, 148, 77, {
+  // background: "#ff030a",
+  render: {
+    sprite: {
+      texture: "./figure/eyeNormal.png",
+      xScale: 1,
+      yScale: 1
+    }
+  },
+  inertia: Infinity // prevent rotation
+});
+
 // Tail
 const tail = Bodies.rectangle(centerX - 150, baseY + 30, 50, 50, {
   // background: "#0a3cfd",
@@ -166,7 +192,7 @@ const fingerFour = Bodies.rectangle(centerX - 40, baseY + 150, 13, 35, {
   inertia: Infinity
 });
 
-World.add(world, [tail, wingLeft, wingRight, fingerOne, fingerTwo, fingerThree, fingerFour, legRight, legLeft, body]);
+World.add(world, [tail, wingLeft, wingRight, fingerOne, fingerTwo, fingerThree, fingerFour, legRight, legLeft, body, eye, nose]);
 
 // Joints
 const joints = [
@@ -176,6 +202,26 @@ const joints = [
     bodyB: wingLeft,
     pointB: { x: 0, y: -35 },
     stiffness: 0,
+    damping: 0,
+    length: 0,
+    render: { visible: false }
+  }),
+  Constraint.create({
+    bodyA: body,
+    pointA: { x: 0, y: 0 },
+    bodyB: eye,
+    pointB: { x: 0, y: 70 },
+    stiffness: 1,
+    damping: 0,
+    length: 0,
+    render: { visible: false }
+  }),
+  Constraint.create({
+    bodyA: body,
+    pointA: { x: 0, y: 0 },
+    bodyB: nose,
+    pointB: { x: 0, y: 20 },
+    stiffness: 1,
     damping: 0,
     length: 0,
     render: { visible: false }
