@@ -50,7 +50,7 @@ const body = Bodies.rectangle(centerX, baseY, 320, 400, {
   // background: "#ff030a",
   render: {
     sprite: {
-      texture: "./body.png",
+      texture: "./figure/body.png",
       xScale: 1,
       yScale: 1
     }
@@ -64,7 +64,7 @@ const tail = Bodies.rectangle(centerX - 150, baseY + 30, 50, 50, {
   // background: "#0a3cfd",
   render: {
     sprite: {
-      texture: "./tail.png",
+      texture: "./figure/tail.png",
       xScale: 1,
       yScale: 1
     }
@@ -77,7 +77,7 @@ const wingLeft = Bodies.rectangle(centerX - 150, baseY - 20, 46, 76, {
   // background: "#1a1a2e",
   render: {
     sprite: {
-      texture: "./wing.png",
+      texture: "./figure/wing.png",
       xScale: 1,
       yScale: 1
     }
@@ -88,7 +88,7 @@ const wingRight = Bodies.rectangle(centerX + 150, baseY - 20, 46, 76, {
   // background: "#9354db",
   render: {
     sprite: {
-      texture: "./wing.png",
+      texture: "./figure/wing.png",
       xScale: 1,
       yScale: 1
     }
@@ -97,22 +97,22 @@ const wingRight = Bodies.rectangle(centerX + 150, baseY - 20, 46, 76, {
 });
 
 // Legs
-const legLeft = Bodies.rectangle(centerX + 40, baseY + 150, 54, 63, {
+const legLeft = Bodies.rectangle(centerX + 40, baseY + 150, 13, 70, {
   // background: "#cd259c",
   render: {
     sprite: {
-      texture: "./leg.png",
+      texture: "./figure/leg.png",
       xScale: 1,
       yScale: 1
     }
   },
   inertia: Infinity
 });
-const legRight = Bodies.rectangle(centerX - 40, baseY + 150, 54, 63, {
+const legRight = Bodies.rectangle(centerX - 40, baseY + 150, 13, 70, {
   // background: "#6539ba",
   render: {
     sprite: {
-      texture: "./leg.png",
+      texture: "./figure/leg.png",
       xScale: 1,
       yScale: 1
     }
@@ -120,7 +120,53 @@ const legRight = Bodies.rectangle(centerX - 40, baseY + 150, 54, 63, {
   inertia: Infinity
 });
 
-World.add(world, [tail, wingLeft, wingRight, legLeft, legRight, body]);
+// Fingers
+const fingerOne = Bodies.rectangle(centerX + 40, baseY + 150, 13, 35, {
+  // background: "#cd259c",
+  render: {
+    sprite: {
+      texture: "./figure/finger.png",
+      xScale: 1,
+      yScale: 1
+    }
+  },
+  inertia: Infinity
+});
+const fingerTwo = Bodies.rectangle(centerX + 40, baseY + 150, 13, 35, {
+  // background: "#6539ba",
+  render: {
+    sprite: {
+      texture: "./figure/finger.png",
+      xScale: 1,
+      yScale: 1
+    }
+  },
+  inertia: Infinity
+});
+const fingerThree = Bodies.rectangle(centerX - 40, baseY + 150, 13, 35, {
+  // background: "#cd259c",
+  render: {
+    sprite: {
+      texture: "./figure/finger.png",
+      xScale: 1,
+      yScale: 1
+    }
+  },
+  inertia: Infinity
+});
+const fingerFour = Bodies.rectangle(centerX - 40, baseY + 150, 13, 35, {
+  // background: "#6539ba",
+  render: {
+    sprite: {
+      texture: "./figure/finger.png",
+      xScale: 1,
+      yScale: 1
+    }
+  },
+  inertia: Infinity
+});
+
+World.add(world, [tail, wingLeft, wingRight, fingerOne, fingerTwo, fingerThree, fingerFour, legRight, legLeft, body]);
 
 // Joints
 const joints = [
@@ -149,7 +195,7 @@ const joints = [
     pointA: { x: -40, y: 190 },
     bodyB: legLeft,
     pointB: { x: 0, y: -30 },
-    stiffness: 0,
+    stiffness: 1,
     damping: 0,
     length: 0,
     render: { visible: false }
@@ -159,7 +205,47 @@ const joints = [
     pointA: { x: 40, y: 190 },
     bodyB: legRight,
     pointB: { x: 0, y: -30 },
-    stiffness: 0,
+    stiffness: 1,
+    damping: 0,
+    length: 0,
+    render: { visible: false }
+  }),
+  Constraint.create({
+    bodyA: body,
+    pointA: { x: 40, y: 220 },
+    bodyB: fingerOne,
+    pointB: { x: 0, y: -15 },
+    stiffness: 1,
+    damping: 0,
+    length: 0,
+    render: { visible: false }
+  }),
+  Constraint.create({
+    bodyA: body,
+    pointA: { x: 40, y: 220 },
+    bodyB: fingerTwo,
+    pointB: { x: 0, y: -15 },
+    stiffness: 1,
+    damping: 0,
+    length: 0,
+    render: { visible: false }
+  }),
+  Constraint.create({
+    bodyA: body,
+    pointA: { x: -40, y: 220 },
+    bodyB: fingerThree,
+    pointB: { x: 0, y: -15 },
+    stiffness: 1,
+    damping: 0,
+    length: 0,
+    render: { visible: false }
+  }),
+  Constraint.create({
+    bodyA: body,
+    pointA: { x: -40, y: 220 },
+    bodyB: fingerFour,
+    pointB: { x: 0, y: -15 },
+    stiffness: 1,
     damping: 0,
     length: 0,
     render: { visible: false }
@@ -191,6 +277,18 @@ Events.on(engine, "beforeUpdate", () => {
   const wingAngle = oscillate(time, 2, Math.PI / 6);
   Body.setAngle(wingLeft, -wingAngle + Math.PI / 2);
   Body.setAngle(wingRight, wingAngle + Math.PI / 2);
+
+  // Fingers flap with 30° base offset, mirrored directions
+  const fingerBase = Math.PI / 4;          // 30° base angle
+  const fingerOsc = oscillate(time, 2, Math.PI / 12); // ±15° oscillation
+
+  // Right-side fingers → +oscillation
+  Body.setAngle(fingerOne, -fingerBase + fingerOsc);
+  Body.setAngle(fingerTwo, fingerBase - fingerOsc);
+
+  // Left-side fingers → -oscillation (mirror effect)
+  Body.setAngle(fingerThree, -fingerBase + fingerOsc);
+  Body.setAngle(fingerFour, fingerBase - fingerOsc);
 
   // Tail sways ±20°
   const tailAngle = oscillate(time, 1.5, Math.PI / 9);
