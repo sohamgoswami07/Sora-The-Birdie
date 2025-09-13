@@ -6,7 +6,7 @@ const { Engine, Render, Runner, World, Bodies, Body, Events, Constraint } = Matt
 // Setup engine + world
 const engine = Engine.create();
 const world = engine.world;
-engine.gravity.y = 1;
+engine.gravity.y = 0;
 
 // Renderer
 const render = Render.create({
@@ -22,15 +22,6 @@ const render = Render.create({
 Render.run(render);
 Runner.run(Runner.create(), engine);
 
-// Add canvas boundaries
-const boundaries = [
-  Bodies.rectangle(window.innerWidth / 2, -50, window.innerWidth, 100, { isStatic: true }), // top
-  Bodies.rectangle(window.innerWidth / 2, window.innerHeight + 50, window.innerWidth, 100, { isStatic: true }), // bottom
-  Bodies.rectangle(-50, window.innerHeight / 2, 100, window.innerHeight, { isStatic: true }), // left
-  Bodies.rectangle(window.innerWidth + 50, window.innerHeight / 2, 100, window.innerHeight, { isStatic: true }) // right
-];
-World.add(world, boundaries);
-
 // Ground
 const ground = Bodies.rectangle(
   window.innerWidth / 2,
@@ -45,150 +36,54 @@ World.add(world, ground);
 const centerX = window.innerWidth / 2;
 const baseY = 370;
 
-// Body (main body stays upright)
+// Body and parts
 const body = Bodies.rectangle(centerX, baseY, 320, 400, {
-  // background: "#ff030a",
-  render: {
-    sprite: {
-      texture: "./figure/body.png",
-      xScale: 1,
-      yScale: 1
-    }
-  },
+  render: { sprite: { texture: "./figure/body.png", xScale: 1, yScale: 1 } },
   isStatic: true,
-  inertia: Infinity // prevent rotation
-});
-
-// Eyes
-const nose = Bodies.rectangle(centerX, baseY, 31, 31, {
-  // background: "#ff030a",
-  render: {
-    sprite: {
-      texture: "./figure/nose.png",
-      xScale: 1,
-      yScale: 1
-    }
-  },
-  inertia: Infinity // prevent rotation
-});
-
-// Eyes
-const eye = Bodies.rectangle(centerX, baseY, 148, 77, {
-  // background: "#ff030a",
-  render: {
-    sprite: {
-      texture: "./figure/eyeNormal.png",
-      xScale: 1,
-      yScale: 1
-    }
-  },
-  inertia: Infinity // prevent rotation
-});
-
-// Tail
-const tail = Bodies.rectangle(centerX - 150, baseY + 30, 50, 50, {
-  // background: "#0a3cfd",
-  render: {
-    sprite: {
-      texture: "./figure/tail.png",
-      xScale: 1,
-      yScale: 1
-    }
-  },
   inertia: Infinity
 });
-
-// Wings
+const nose = Bodies.rectangle(centerX, baseY, 31, 31, {
+  render: { sprite: { texture: "./figure/nose.png", xScale: 1, yScale: 1 } },
+  inertia: Infinity
+});
+const eye = Bodies.rectangle(centerX, baseY, 148, 77, {
+  render: { sprite: { texture: "./figure/happy eyes.png", xScale: 1, yScale: 1 } },
+  inertia: Infinity
+});
+const tail = Bodies.rectangle(centerX - 150, baseY + 30, 50, 50, {
+  render: { sprite: { texture: "./figure/tail.png", xScale: 1, yScale: 1 } },
+  inertia: Infinity
+});
 const wingLeft = Bodies.rectangle(centerX - 150, baseY - 20, 46, 76, {
-  // background: "#1a1a2e",
-  render: {
-    sprite: {
-      texture: "./figure/wing.png",
-      xScale: 1,
-      yScale: 1
-    }
-   },
+  render: { sprite: { texture: "./figure/wing.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 const wingRight = Bodies.rectangle(centerX + 150, baseY - 20, 46, 76, {
-  // background: "#9354db",
-  render: {
-    sprite: {
-      texture: "./figure/wing.png",
-      xScale: 1,
-      yScale: 1
-    }
-  },
+  render: { sprite: { texture: "./figure/wing.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
-
-// Legs
 const legLeft = Bodies.rectangle(centerX + 40, baseY + 150, 13, 70, {
-  // background: "#cd259c",
-  render: {
-    sprite: {
-      texture: "./figure/leg.png",
-      xScale: 1,
-      yScale: 1
-    }
-  },
+  render: { sprite: { texture: "./figure/leg.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 const legRight = Bodies.rectangle(centerX - 40, baseY + 150, 13, 70, {
-  // background: "#6539ba",
-  render: {
-    sprite: {
-      texture: "./figure/leg.png",
-      xScale: 1,
-      yScale: 1
-    }
-  },
+  render: { sprite: { texture: "./figure/leg.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
-
-// Fingers
 const fingerOne = Bodies.rectangle(centerX + 40, baseY + 150, 13, 35, {
-  // background: "#cd259c",
-  render: {
-    sprite: {
-      texture: "./figure/finger.png",
-      xScale: 1,
-      yScale: 1
-    }
-  },
+  render: { sprite: { texture: "./figure/finger.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 const fingerTwo = Bodies.rectangle(centerX + 40, baseY + 150, 13, 35, {
-  // background: "#6539ba",
-  render: {
-    sprite: {
-      texture: "./figure/finger.png",
-      xScale: 1,
-      yScale: 1
-    }
-  },
+  render: { sprite: { texture: "./figure/finger.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 const fingerThree = Bodies.rectangle(centerX - 40, baseY + 150, 13, 35, {
-  // background: "#cd259c",
-  render: {
-    sprite: {
-      texture: "./figure/finger.png",
-      xScale: 1,
-      yScale: 1
-    }
-  },
+  render: { sprite: { texture: "./figure/finger.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 const fingerFour = Bodies.rectangle(centerX - 40, baseY + 150, 13, 35, {
-  // background: "#6539ba",
-  render: {
-    sprite: {
-      texture: "./figure/finger.png",
-      xScale: 1,
-      yScale: 1
-    }
-  },
+  render: { sprite: { texture: "./figure/finger.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 
@@ -196,157 +91,170 @@ World.add(world, [tail, wingLeft, wingRight, fingerOne, fingerTwo, fingerThree, 
 
 // Joints
 const joints = [
-  Constraint.create({
-    bodyA: body,
-    pointA: { x: -130, y: 0 },
-    bodyB: wingLeft,
-    pointB: { x: 0, y: -35 },
-    stiffness: 0,
-    damping: 0,
-    length: 0,
-    render: { visible: false }
-  }),
-  Constraint.create({
-    bodyA: body,
-    pointA: { x: 0, y: 0 },
-    bodyB: eye,
-    pointB: { x: 0, y: 70 },
-    stiffness: 1,
-    damping: 0,
-    length: 0,
-    render: { visible: false }
-  }),
-  Constraint.create({
-    bodyA: body,
-    pointA: { x: 0, y: 0 },
-    bodyB: nose,
-    pointB: { x: 0, y: 20 },
-    stiffness: 1,
-    damping: 0,
-    length: 0,
-    render: { visible: false }
-  }),
-  Constraint.create({
-    bodyA: body,
-    pointA: { x: 130, y: 0 },
-    bodyB: wingRight,
-    pointB: { x: 0, y: 35 },
-    stiffness: 0,
-    damping: 0,
-    length: 0,
-    render: { visible: false }
-  }),
-  Constraint.create({
-    bodyA: body,
-    pointA: { x: -40, y: 190 },
-    bodyB: legLeft,
-    pointB: { x: 0, y: -30 },
-    stiffness: 1,
-    damping: 0,
-    length: 0,
-    render: { visible: false }
-  }),
-  Constraint.create({
-    bodyA: body,
-    pointA: { x: 40, y: 190 },
-    bodyB: legRight,
-    pointB: { x: 0, y: -30 },
-    stiffness: 1,
-    damping: 0,
-    length: 0,
-    render: { visible: false }
-  }),
-  Constraint.create({
-    bodyA: body,
-    pointA: { x: 40, y: 220 },
-    bodyB: fingerOne,
-    pointB: { x: 0, y: -15 },
-    stiffness: 1,
-    damping: 0,
-    length: 0,
-    render: { visible: false }
-  }),
-  Constraint.create({
-    bodyA: body,
-    pointA: { x: 40, y: 220 },
-    bodyB: fingerTwo,
-    pointB: { x: 0, y: -15 },
-    stiffness: 1,
-    damping: 0,
-    length: 0,
-    render: { visible: false }
-  }),
-  Constraint.create({
-    bodyA: body,
-    pointA: { x: -40, y: 220 },
-    bodyB: fingerThree,
-    pointB: { x: 0, y: -15 },
-    stiffness: 1,
-    damping: 0,
-    length: 0,
-    render: { visible: false }
-  }),
-  Constraint.create({
-    bodyA: body,
-    pointA: { x: -40, y: 220 },
-    bodyB: fingerFour,
-    pointB: { x: 0, y: -15 },
-    stiffness: 1,
-    damping: 0,
-    length: 0,
-    render: { visible: false }
-  }),
-  Constraint.create({
-    bodyA: body,
-    pointA: { x: -120, y: 150 },
-    bodyB: tail,
-    pointB: { x: 0, y: -40 },
-    stiffness: 1,
-    damping: 0,
-    length: 0,
-    render: { visible: false }
-  })
+  Constraint.create({ bodyA: body, pointA: { x: -130, y: 0 }, bodyB: wingLeft, pointB: { x: 0, y: -35 }, stiffness: 0, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: 0, y: 0 }, bodyB: eye, pointB: { x: 0, y: 70 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: 0, y: 0 }, bodyB: nose, pointB: { x: 0, y: 20 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: 130, y: 0 }, bodyB: wingRight, pointB: { x: 0, y: 35 }, stiffness: 0, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: -40, y: 190 }, bodyB: legLeft, pointB: { x: 0, y: -30 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: 40, y: 190 }, bodyB: legRight, pointB: { x: 0, y: -30 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: 40, y: 220 }, bodyB: fingerOne, pointB: { x: 0, y: -15 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: 40, y: 220 }, bodyB: fingerTwo, pointB: { x: 0, y: -15 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: -40, y: 220 }, bodyB: fingerThree, pointB: { x: 0, y: -15 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: -40, y: 220 }, bodyB: fingerFour, pointB: { x: 0, y: -15 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: -120, y: 150 }, bodyB: tail, pointB: { x: 0, y: -40 }, stiffness: 1, length: 0, render: { visible: false } })
 ];
 World.add(world, joints);
 
-
-// Utility: oscillation function
+// ------------------- Utility -------------------
 function oscillate(time, speed, maxAngle) {
   return Math.sin(time * speed) * maxAngle;
 }
 
-// Animate wings, tail, legs, and jumping
+// ------------------- Audio Setup -------------------
+const audio = new Audio("./music/music.mp3");
+audio.loop = true;
+audio.preload = "auto";
+
+const ctx = new (window.AudioContext || window.webkitAudioContext)();
+let analyser, dataArray, bufferLength;
+
+function setupAudioNodes() {
+  const src = ctx.createMediaElementSource(audio);
+  analyser = ctx.createAnalyser();
+  analyser.fftSize = 256;
+  bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
+
+  src.connect(analyser);
+  analyser.connect(ctx.destination);
+}
+
+// Beat detection vars
+const BEAT_HISTORY = 43;
+const energyHistory = new Array(BEAT_HISTORY).fill(0);
+let historyPos = 0;
+let beatPulse = 0;
+
+function detectBeat() {
+  if (!analyser) return;
+  analyser.getByteFrequencyData(dataArray);
+  const bassEnd = Math.max(2, Math.floor(bufferLength * 0.12));
+  let sum = 0;
+  for (let i = 0; i < bassEnd; i++) sum += dataArray[i];
+  const bassAvg = sum / bassEnd;
+  const historyAvg = energyHistory.reduce((a, b) => a + b, 0) / BEAT_HISTORY;
+
+  energyHistory[historyPos] = bassAvg;
+  historyPos = (historyPos + 1) % BEAT_HISTORY;
+
+  const threshold = 1.45;
+  if (bassAvg > historyAvg * threshold && bassAvg > 120) {
+    beatPulse = Math.min(1.5, 0.8 + bassAvg / 255);
+  }
+}
+
+function updateAudioData() {
+  detectBeat();
+  requestAnimationFrame(updateAudioData);
+}
+
+// ------------------- Play/Pause button -------------------
+const playBtn = document.getElementById("audioControls");
+let isPlaying = false;
+
+playBtn.addEventListener("click", async () => {
+  if (!analyser) setupAudioNodes();
+  await ctx.resume();
+
+  if (!isPlaying) {
+    try {
+      await audio.play();
+      isPlaying = true;
+      audio.muted = false;
+      playBtn.textContent = "⏸ Pause Music";
+      updateAudioData();
+    } catch (err) {
+      console.error("Music play failed:", err);
+    }
+  } else {
+    audio.pause();
+    isPlaying = false;
+    playBtn.textContent = "▶ Play Music";
+  }
+});
+
+// ------------------- Autoplay on page load -------------------
+window.addEventListener("load", async () => {
+  if (!analyser) setupAudioNodes();
+  await ctx.resume();
+
+  try {
+    audio.muted = true;
+    await audio.play();
+    isPlaying = true;
+    playBtn.textContent = "⏸ Pause Music";
+    updateAudioData();
+
+    setTimeout(() => {
+      audio.muted = false;
+    }, 500);
+  } catch (err) {
+    console.warn("Autoplay blocked, waiting for user click...");
+    playBtn.textContent = "▶ Play Music";
+  }
+});
+
+// ------------------- Animations -------------------
+let stopTransition = false;
+
 Events.on(engine, "beforeUpdate", () => {
-  const time = engine.timing.timestamp / 500; // seconds
+  const time = engine.timing.timestamp / 500;
 
-  // Wings flap smoothly ±45°
-  const wingAngle = oscillate(time, 2, Math.PI / 6);
-  Body.setAngle(wingLeft, -wingAngle + Math.PI / 2);
-  Body.setAngle(wingRight, wingAngle + Math.PI / 2);
+  if (isPlaying) {
+    stopTransition = false;
 
-  // Fingers flap with 30° base offset, mirrored directions
-  const fingerBase = Math.PI / 4;          // 30° base angle
-  const fingerOsc = oscillate(time, 2, Math.PI / 12); // ±15° oscillation
+    // Wings flap with beat
+    const wingAngle = oscillate(time, 2, Math.PI / 6 * (1 + beatPulse * 0.6));
+    Body.setAngle(wingLeft, -wingAngle + Math.PI / 2);
+    Body.setAngle(wingRight, wingAngle + Math.PI / 2);
 
-  // Right-side fingers → +oscillation
-  Body.setAngle(fingerOne, -fingerBase + fingerOsc);
-  Body.setAngle(fingerTwo, fingerBase - fingerOsc);
+    // Fingers flap
+    const fingerBase = Math.PI / 4;
+    const fingerOsc = oscillate(time, 2, Math.PI / 12);
+    Body.setAngle(fingerOne, -fingerBase + fingerOsc);
+    Body.setAngle(fingerTwo, fingerBase - fingerOsc);
+    Body.setAngle(fingerThree, -fingerBase + fingerOsc);
+    Body.setAngle(fingerFour, fingerBase - fingerOsc);
 
-  // Left-side fingers → -oscillation (mirror effect)
-  Body.setAngle(fingerThree, -fingerBase + fingerOsc);
-  Body.setAngle(fingerFour, fingerBase - fingerOsc);
+    // Body jump synced with beats (smooth)
+    const targetY = baseY + Math.sin(time * 2) * -40;
+    const currentY = body.position.y;
+    const smoothY = currentY + (targetY - currentY) * 0.1;
+    Body.setPosition(body, { x: centerX, y: smoothY });
 
-  // Tail sways ±20°
+    // Decay beat pulse
+    beatPulse *= 0.92;
+  } else {
+    // Reset others to neutral pose when paused
+    Body.setAngle(wingLeft, wingLeft.angle + (Math.PI / 6 - wingLeft.angle) * 0.1);
+    Body.setAngle(wingRight, wingRight.angle + (Math.PI / 1.2 - wingRight.angle) * 0.1);
+    Body.setAngle(fingerOne, (fingerOne.angle - 9) * 0.1);
+    Body.setAngle(fingerTwo, fingerTwo.angle + (1 - fingerTwo.angle) * 0.1);
+    Body.setAngle(fingerThree, (fingerThree.angle - 9) * 0.1);
+    Body.setAngle(fingerFour, fingerFour.angle + (1 - fingerFour.angle) * 0.1);
+
+    // Smooth transition for body Y position
+    const currentY = body.position.y;
+    const targetY = baseY + 40;
+    const smoothY = currentY + (targetY - currentY) * 0.1;
+    Body.setPosition(body, { x: centerX, y: smoothY });
+  }
+
+  // Tail moves continuously no matter what
   const tailAngle = oscillate(time, 1.5, Math.PI / 9);
   Body.setAngle(tail, tailAngle + Math.PI / 4);
 
-  // Body continuous jump (sinusoidal up/down)
-  const jumpHeight = 40; // pixels up/down
-  const jumpSpeed = 2;   // frequency
-  const newY = baseY + Math.sin(time * jumpSpeed) * -jumpHeight;
-  Body.setPosition(body, { x: centerX, y: newY });
-
-  // Keep body upright
+  // Keep body upright regardless
   Body.setAngle(body, 0);
   Body.setAngularVelocity(body, 0);
 });

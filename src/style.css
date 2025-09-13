@@ -9,4 +9,22 @@ body {
   height: 100dvh;
   width: 100dvw;
   overflow: hidden;
-};
+}
+
+#audioControls {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  padding: 8px 14px;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  outline: none;
+}
+#audioControls:hover {
+  background: #444;
+}
