@@ -75,12 +75,15 @@ body {
   font-size: 0.75rem;
   bottom: 0.25rem;
   left: 0;
-  padding: 0rem 2rem;
   height: 2rem;
   width: 100%;
   color: #000;
   display: flex;
   justify-content: space-between;
+}
+
+.music, .studio-yuki {
+  padding: 0rem 2rem;
 }
 
 .tags a {

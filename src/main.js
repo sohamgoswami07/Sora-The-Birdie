@@ -24,58 +24,58 @@ Runner.run(Runner.create(), engine);
 
 // Center X position
 const centerX = window.innerWidth / 2;
-const baseY = 285;
+const baseY = 260;
 
 // Body and parts
-const body = Bodies.rectangle(centerX, baseY, 320, 400, {
-  render: { sprite: { texture: "./figure/body.png", xScale: 1, yScale: 1 } },
+const body = Bodies.rectangle(centerX, baseY, 320 * 0.85, 400 * 0.85, {
+  render: { sprite: { texture: "./figure/body.png", xScale: 0.85, yScale: 0.85 } },
   isStatic: true,
   inertia: Infinity
 });
-const nose = Bodies.rectangle(centerX, baseY, 31, 21, {
-  render: { sprite: { texture: "./figure/nose.png", xScale: 1, yScale: 1 } },
+const nose = Bodies.rectangle(centerX, baseY, 31 * 0.85, 21 * 0.85, {
+  render: { sprite: { texture: "./figure/nose.png", xScale: 0.85, yScale: 0.85 } },
   isStatic: true,
   inertia: Infinity
 });
-const eye = Bodies.rectangle(centerX, baseY, 148, 55, {
-  render: { sprite: { texture: "./figure/happy eyes.png", xScale: 1, yScale: 1 } },
+const eye = Bodies.rectangle(centerX, baseY, 148 * 0.85, 55 * 0.85, {
+  render: { sprite: { texture: "./figure/happy eyes.png", xScale: 0.85, yScale: 0.85 } },
   isStatic: true,
   inertia: Infinity
 });
-const tail = Bodies.rectangle(centerX - 150, baseY + 30, 50, 50, {
-  render: { sprite: { texture: "./figure/tail.png", xScale: 1, yScale: 1 } },
+const tail = Bodies.rectangle(centerX, baseY, 50 * 0.85, 50 * 0.85, {
+  render: { sprite: { texture: "./figure/tail.png", xScale: 0.85, yScale: 0.85 } },
   inertia: Infinity
 });
-const wingLeft = Bodies.rectangle(centerX - 150, baseY - 20, 46, 76, {
-  render: { sprite: { texture: "./figure/wing.png", xScale: 1, yScale: 1 } },
+const wingLeft = Bodies.rectangle(centerX, baseY, 46 * 0.85, 76 * 0.85, {
+  render: { sprite: { texture: "./figure/wing.png", xScale: 0.85, yScale: 0.85 } },
   inertia: Infinity
 });
-const wingRight = Bodies.rectangle(centerX + 150, baseY - 20, 46, 76, {
-  render: { sprite: { texture: "./figure/wing.png", xScale: 1, yScale: 1 } },
+const wingRight = Bodies.rectangle(centerX, baseY, 46 * 0.85, 76 * 0.85, {
+  render: { sprite: { texture: "./figure/wing.png", xScale: 0.85, yScale: 0.85 } },
   inertia: Infinity
 });
-const legLeft = Bodies.rectangle(centerX + 40, baseY + 150, 13, 70, {
-  render: { sprite: { texture: "./figure/legOne.png", xScale: 1, yScale: 1 } },
+const legLeft = Bodies.rectangle(centerX, baseY, 13 * 0.85, 70 * 0.85, {
+  render: { sprite: { texture: "./figure/legOne.png", xScale: 0.85, yScale: 0.85 } },
   inertia: Infinity
 });
-const legRight = Bodies.rectangle(centerX - 40, baseY + 150, 13, 70, {
-  render: { sprite: { texture: "./figure/legTwo.png", xScale: 1, yScale: 1 } },
+const legRight = Bodies.rectangle(centerX, baseY, 13 * 0.85, 70 * 0.85, {
+  render: { sprite: { texture: "./figure/legTwo.png", xScale: 0.85, yScale: 0.85 } },
   inertia: Infinity
 });
-const fingerOne = Bodies.rectangle(centerX + 40, baseY + 150, 13, 35, {
-  render: { sprite: { texture: "./figure/fingerTwo.png", xScale: 1, yScale: 1 } },
+const fingerOne = Bodies.rectangle(centerX, baseY, 13 * 0.85, 35 * 0.85, {
+  render: { sprite: { texture: "./figure/fingerTwo.png", xScale: 0.85, yScale: 0.85 } },
   inertia: Infinity
 });
-const fingerTwo = Bodies.rectangle(centerX + 40, baseY + 150, 13, 35, {
-  render: { sprite: { texture: "./figure/fingerOne.png", xScale: 1, yScale: 1 } },
+const fingerTwo = Bodies.rectangle(centerX, baseY, 13 * 0.85, 35 * 0.85, {
+  render: { sprite: { texture: "./figure/fingerOne.png", xScale: 0.85, yScale: 0.85 } },
   inertia: Infinity
 });
-const fingerThree = Bodies.rectangle(centerX - 40, baseY + 150, 13, 35, {
-  render: { sprite: { texture: "./figure/fingerTwo.png", xScale: 1, yScale: 1 } },
+const fingerThree = Bodies.rectangle(centerX, baseY, 13 * 0.85, 35 * 0.85, {
+  render: { sprite: { texture: "./figure/fingerTwo.png", xScale: 0.85, yScale: 0.85 } },
   inertia: Infinity
 });
-const fingerFour = Bodies.rectangle(centerX - 40, baseY + 150, 13, 35, {
-  render: { sprite: { texture: "./figure/fingerOne.png", xScale: 1, yScale: 1 } },
+const fingerFour = Bodies.rectangle(centerX, baseY, 13 * 0.85, 35 * 0.85, {
+  render: { sprite: { texture: "./figure/fingerOne.png", xScale: 0.85, yScale: 0.85 } },
   inertia: Infinity
 });
 
@@ -84,15 +84,33 @@ World.add(world, [tail, wingLeft, wingRight, fingerOne, fingerTwo, fingerThree, 
 
 // Joints
 const joints = [
-  Constraint.create({ bodyA: body, pointA: { x: -130, y: 0 }, bodyB: wingLeft, pointB: { x: 0, y: -35 }, stiffness: 0, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: 130, y: 0 }, bodyB: wingRight, pointB: { x: 0, y: 35 }, stiffness: 0, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: -40, y: 190 }, bodyB: legLeft, pointB: { x: 0, y: -25 }, stiffness: 1, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: 40, y: 190 }, bodyB: legRight, pointB: { x: 0, y: -25 }, stiffness: 1, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: 40, y: 220 }, bodyB: fingerOne, pointB: { x: -9, y: -10 }, stiffness: 1, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: 40, y: 220 }, bodyB: fingerTwo, pointB: { x: 12, y: -12 }, stiffness: 1, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: -40, y: 220 }, bodyB: fingerThree, pointB: { x: -9, y: -13 }, stiffness: 1, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: -40, y: 220 }, bodyB: fingerFour, pointB: { x: 9, y: -10 }, stiffness: 1, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: -120, y: 150 }, bodyB: tail, pointB: { x: 0, y: -40 }, stiffness: 1, length: 0, render: { visible: false } })
+  Constraint.create({ bodyA: body, pointA: { x: -110, y: 0 }, bodyB: wingLeft, pointB: { x: 0, y: -30 }, stiffness: 0, length: 0, 
+    // render: { visible: false }
+   }),
+  Constraint.create({ bodyA: body, pointA: { x: 110, y: 0 }, bodyB: wingRight, pointB: { x: 0, y: 30 }, stiffness: 0, length: 0, 
+    // render: { visible: false }
+   }),
+  Constraint.create({ bodyA: body, pointA: { x: -100, y: 120 }, bodyB: tail, pointB: { x: 0, y: -40 }, stiffness: 1, length: 0, 
+    // render: { visible: false }
+  }),
+  Constraint.create({ bodyA: body, pointA: { x: -40, y: 160 }, bodyB: legLeft, pointB: { x: 0, y: -25 }, stiffness: 1, length: 0, 
+    // render: { visible: false }
+   }),
+  Constraint.create({ bodyA: body, pointA: { x: 40, y: 160 }, bodyB: legRight, pointB: { x: 0, y: -25 }, stiffness: 1, length: 0, 
+    // render: { visible: false }
+   }),
+  Constraint.create({ bodyA: body, pointA: { x: 40, y: 185 }, bodyB: fingerOne, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, 
+    // render: { visible: false }
+   }),
+  Constraint.create({ bodyA: body, pointA: { x: 37, y: 183 }, bodyB: fingerTwo, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, 
+    // render: { visible: false }
+   }),
+  Constraint.create({ bodyA: body, pointA: { x: -37, y: 185 }, bodyB: fingerThree, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, 
+    // render: { visible: false }
+   }),
+  Constraint.create({ bodyA: body, pointA: { x: -40, y: 185 }, bodyB: fingerFour, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, 
+    render: { visible: false }
+   })
 ];
 World.add(world, joints);
 
@@ -210,7 +228,7 @@ Events.on(engine, "beforeUpdate", () => {
     smoothedBeatPulse += (beatPulse - smoothedBeatPulse) * 0.08;
 
     // Body jump (smooth, synced mainly with height not speed)
-    const jumpHeight = 25 + smoothedBeatPulse * 55;  // scale height only
+    const jumpHeight = 15 + smoothedBeatPulse * 40;  // scale height only
     const jumpSpeed = 2.2; // keep constant frequency for smoothness
     const targetY = baseY + Math.sin(time * jumpSpeed) * -jumpHeight;
 
@@ -240,8 +258,8 @@ Events.on(engine, "beforeUpdate", () => {
 
     // Move eyes and nose with body
     const bodyMovement = smoothY - baseY;
-    const eyeExtraOffset = Math.sin(time * jumpSpeed) * -12;
-    const noseExtraOffset = Math.sin(time * jumpSpeed) * -12;
+    const eyeExtraOffset = Math.sin(time * jumpSpeed) * -8;
+    const noseExtraOffset = Math.sin(time * jumpSpeed) * -8;
 
     Body.setPosition(eye, { 
       x: centerX, 
@@ -253,8 +271,8 @@ Events.on(engine, "beforeUpdate", () => {
     });
 
     // Reset scale back to normal
-    const currentScaleY = body.render.sprite.yScale || 1;
-    const targetScaleY = 1.0;
+    const currentScaleY = body.render.sprite.yScale || 0.85;
+    const targetScaleY = 0.85;
     const smoothScaleY = currentScaleY + (targetScaleY - currentScaleY) * 0.1;
     body.render.sprite.yScale = smoothScaleY;
 
@@ -277,8 +295,8 @@ Events.on(engine, "beforeUpdate", () => {
     Body.setPosition(eye, { x: centerX, y: baseY - 65 + bodyMovement });
     Body.setPosition(nose, { x: centerX, y: baseY - 20 + bodyMovement });
 
-    const currentScaleY = body.render.sprite.yScale || 1;
-    const targetScaleY = 0.95;
+    const currentScaleY = body.render.sprite.yScale || 0.85;
+    const targetScaleY = 0.85;
     const smoothScaleY = currentScaleY + (targetScaleY - currentScaleY) * 0.1;
     body.render.sprite.yScale = smoothScaleY;
   }
