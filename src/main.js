@@ -84,33 +84,15 @@ World.add(world, [tail, wingLeft, wingRight, fingerOne, fingerTwo, fingerThree, 
 
 // Joints
 const joints = [
-  Constraint.create({ bodyA: body, pointA: { x: -110, y: 0 }, bodyB: wingLeft, pointB: { x: 0, y: -30 }, stiffness: 0, length: 0, 
-    // render: { visible: false }
-   }),
-  Constraint.create({ bodyA: body, pointA: { x: 110, y: 0 }, bodyB: wingRight, pointB: { x: 0, y: 30 }, stiffness: 0, length: 0, 
-    // render: { visible: false }
-   }),
-  Constraint.create({ bodyA: body, pointA: { x: -100, y: 120 }, bodyB: tail, pointB: { x: 0, y: -40 }, stiffness: 1, length: 0, 
-    // render: { visible: false }
-  }),
-  Constraint.create({ bodyA: body, pointA: { x: -40, y: 160 }, bodyB: legLeft, pointB: { x: 0, y: -25 }, stiffness: 1, length: 0, 
-    // render: { visible: false }
-   }),
-  Constraint.create({ bodyA: body, pointA: { x: 40, y: 160 }, bodyB: legRight, pointB: { x: 0, y: -25 }, stiffness: 1, length: 0, 
-    // render: { visible: false }
-   }),
-  Constraint.create({ bodyA: body, pointA: { x: 40, y: 185 }, bodyB: fingerOne, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, 
-    // render: { visible: false }
-   }),
-  Constraint.create({ bodyA: body, pointA: { x: 37, y: 183 }, bodyB: fingerTwo, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, 
-    // render: { visible: false }
-   }),
-  Constraint.create({ bodyA: body, pointA: { x: -37, y: 185 }, bodyB: fingerThree, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, 
-    // render: { visible: false }
-   }),
-  Constraint.create({ bodyA: body, pointA: { x: -40, y: 185 }, bodyB: fingerFour, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, 
-    render: { visible: false }
-   })
+  Constraint.create({ bodyA: body, pointA: { x: -110, y: 0 }, bodyB: wingLeft, pointB: { x: 0, y: -30 }, stiffness: 0, length: 0, render: { visible: false }}),
+  Constraint.create({ bodyA: body, pointA: { x: 110, y: 0 }, bodyB: wingRight, pointB: { x: 0, y: 30 }, stiffness: 0, length: 0, render: { visible: false }}),
+  Constraint.create({ bodyA: body, pointA: { x: -100, y: 120 }, bodyB: tail, pointB: { x: 0, y: -40 }, stiffness: 1, length: 0, render: { visible: false }}),
+  Constraint.create({ bodyA: body, pointA: { x: -40, y: 160 }, bodyB: legLeft, pointB: { x: 0, y: -25 }, stiffness: 1, lengt: 0, render: { visible: false }}),
+  Constraint.create({ bodyA: body, pointA: { x: 40, y: 160 }, bodyB: legRight, pointB: { x: 0, y: -25 }, stiffness: 1, length: 0, render: { visible: false }}),
+  Constraint.create({ bodyA: body, pointA: { x: 40, y: 185 }, bodyB: fingerOne, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, render: { visible: false }}),
+  Constraint.create({ bodyA: body, pointA: { x: 37, y: 183 }, bodyB: fingerTwo, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, render: { visible: false }}),
+  Constraint.create({ bodyA: body, pointA: { x: -37, y: 185 }, bodyB: fingerThree, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, render: { visible: false }}),
+  Constraint.create({ bodyA: body, pointA: { x: -40, y: 185 }, bodyB: fingerFour, pointB: { x: 0, y: -13 }, stiffness: 1, length: 0, render: { visible: false }})
 ];
 World.add(world, joints);
 
