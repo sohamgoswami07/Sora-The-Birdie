@@ -24,7 +24,32 @@ Runner.run(Runner.create(), engine);
 
 // Center X position
 const centerX = window.innerWidth / 2;
-const baseY = 260;
+
+// Dynamic Y position depending on screen size
+let baseY;
+if (window.innerWidth < 320) {
+  baseY = window.innerHeight / 2; // screen for very small devices
+} else if (window.innerWidth < 768) {
+  baseY = window.innerHeight / 4; // screen for tablet devices
+} else {
+  baseY = window.innerHeight * 0.4; // about 768px screen
+}
+
+window.addEventListener("resize", () => {
+  render.canvas.width = window.innerWidth;
+  render.canvas.height = window.innerHeight;
+
+  const centerX = window.innerWidth / 2;
+
+  if (window.innerWidth < 320) {
+    baseY = window.innerHeight / 2;
+  } else {
+    baseY = window.innerHeight * 0.35;
+  }
+
+  // Move the body and parts to new center
+  Matter.Body.setPosition(body, { x: centerX, y: baseY });
+});
 
 // Body and parts
 const body = Bodies.rectangle(centerX, baseY, 320 * 0.85, 400 * 0.85, {
