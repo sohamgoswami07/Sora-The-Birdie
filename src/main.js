@@ -16,25 +16,15 @@ const render = Render.create({
     width: window.innerWidth,
     height: window.innerHeight,
     wireframes: false,
-    background: "#1a1a2e",
+    background: "transparent",
   }
 });
 Render.run(render);
 Runner.run(Runner.create(), engine);
 
-// Ground
-const ground = Bodies.rectangle(
-  window.innerWidth / 2,
-  window.innerHeight - 40,
-  window.innerWidth,
-  100,
-  { isStatic: true, render: { fillStyle: "#2d5016" } }
-);
-World.add(world, ground);
-
 // Center X position
 const centerX = window.innerWidth / 2;
-const baseY = 370;
+const baseY = 285;
 
 // Body and parts
 const body = Bodies.rectangle(centerX, baseY, 320, 400, {
@@ -65,27 +55,27 @@ const wingRight = Bodies.rectangle(centerX + 150, baseY - 20, 46, 76, {
   inertia: Infinity
 });
 const legLeft = Bodies.rectangle(centerX + 40, baseY + 150, 13, 70, {
-  render: { sprite: { texture: "./figure/leg.png", xScale: 1, yScale: 1 } },
+  render: { sprite: { texture: "./figure/legOne.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 const legRight = Bodies.rectangle(centerX - 40, baseY + 150, 13, 70, {
-  render: { sprite: { texture: "./figure/leg.png", xScale: 1, yScale: 1 } },
+  render: { sprite: { texture: "./figure/legTwo.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 const fingerOne = Bodies.rectangle(centerX + 40, baseY + 150, 13, 35, {
-  render: { sprite: { texture: "./figure/finger.png", xScale: 1, yScale: 1 } },
+  render: { sprite: { texture: "./figure/fingerTwo.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 const fingerTwo = Bodies.rectangle(centerX + 40, baseY + 150, 13, 35, {
-  render: { sprite: { texture: "./figure/finger.png", xScale: 1, yScale: 1 } },
+  render: { sprite: { texture: "./figure/fingerOne.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 const fingerThree = Bodies.rectangle(centerX - 40, baseY + 150, 13, 35, {
-  render: { sprite: { texture: "./figure/finger.png", xScale: 1, yScale: 1 } },
+  render: { sprite: { texture: "./figure/fingerTwo.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 const fingerFour = Bodies.rectangle(centerX - 40, baseY + 150, 13, 35, {
-  render: { sprite: { texture: "./figure/finger.png", xScale: 1, yScale: 1 } },
+  render: { sprite: { texture: "./figure/fingerOne.png", xScale: 1, yScale: 1 } },
   inertia: Infinity
 });
 
@@ -96,12 +86,12 @@ World.add(world, [tail, wingLeft, wingRight, fingerOne, fingerTwo, fingerThree, 
 const joints = [
   Constraint.create({ bodyA: body, pointA: { x: -130, y: 0 }, bodyB: wingLeft, pointB: { x: 0, y: -35 }, stiffness: 0, length: 0, render: { visible: false } }),
   Constraint.create({ bodyA: body, pointA: { x: 130, y: 0 }, bodyB: wingRight, pointB: { x: 0, y: 35 }, stiffness: 0, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: -40, y: 190 }, bodyB: legLeft, pointB: { x: 0, y: -30 }, stiffness: 1, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: 40, y: 190 }, bodyB: legRight, pointB: { x: 0, y: -30 }, stiffness: 1, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: 40, y: 220 }, bodyB: fingerOne, pointB: { x: 0, y: -15 }, stiffness: 1, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: 40, y: 220 }, bodyB: fingerTwo, pointB: { x: 0, y: -15 }, stiffness: 1, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: -40, y: 220 }, bodyB: fingerThree, pointB: { x: 0, y: -15 }, stiffness: 1, length: 0, render: { visible: false } }),
-  Constraint.create({ bodyA: body, pointA: { x: -40, y: 220 }, bodyB: fingerFour, pointB: { x: 0, y: -15 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: -40, y: 190 }, bodyB: legLeft, pointB: { x: 0, y: -25 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: 40, y: 190 }, bodyB: legRight, pointB: { x: 0, y: -25 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: 40, y: 220 }, bodyB: fingerOne, pointB: { x: -9, y: -10 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: 40, y: 220 }, bodyB: fingerTwo, pointB: { x: 12, y: -12 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: -40, y: 220 }, bodyB: fingerThree, pointB: { x: -9, y: -13 }, stiffness: 1, length: 0, render: { visible: false } }),
+  Constraint.create({ bodyA: body, pointA: { x: -40, y: 220 }, bodyB: fingerFour, pointB: { x: 9, y: -10 }, stiffness: 1, length: 0, render: { visible: false } }),
   Constraint.create({ bodyA: body, pointA: { x: -120, y: 150 }, bodyB: tail, pointB: { x: 0, y: -40 }, stiffness: 1, length: 0, render: { visible: false } })
 ];
 World.add(world, joints);
@@ -144,22 +134,27 @@ function detectBeat() {
   if (!analyser) return;
   analyser.getByteFrequencyData(dataArray);
 
+  // Focus on bass frequencies (first ~12% of FFT)
   const bassEnd = Math.max(2, Math.floor(bufferLength * 0.12));
   let sum = 0;
   for (let i = 0; i < bassEnd; i++) sum += dataArray[i];
   const bassAvg = sum / bassEnd;
 
+  // Adaptive thresholding
   const historyAvg = energyHistory.reduce((a, b) => a + b, 0) / BEAT_HISTORY;
   energyHistory[historyPos] = bassAvg;
   historyPos = (historyPos + 1) % BEAT_HISTORY;
 
-  const threshold = 1.2;
-  if (bassAvg > historyAvg * threshold && bassAvg > 90) {
-    beatPulse = Math.min(2.0, 1.0 + bassAvg / 200);
+  // Improved beat detection (peak-based)
+  const isBeat = (bassAvg > historyAvg * 1.3 && bassAvg > 100);
+
+  if (isBeat) {
+    // Push pulse higher when beat detected
+    beatPulse = Math.min(2.0, beatPulse + 0.5);
   }
 
-  // Decay
-  beatPulse *= 0.97;
+  // Decay smoothly
+  beatPulse *= 0.95;
   if (beatPulse < 0.05) beatPulse = 0.05;
 }
 
@@ -189,7 +184,7 @@ playBtn.addEventListener("click", async () => {
       await audio.play();
       isPlaying = true;
       audio.muted = false;
-      playBtn.textContent = "⏸️ Pause Music";
+      playBtn.textContent = "l l Pause";
       updateAudioData();
 
       setEyeExpression("happy");
@@ -200,29 +195,9 @@ playBtn.addEventListener("click", async () => {
   } else {
     audio.pause();
     isPlaying = false;
-    playBtn.textContent = "▶️ Play Music";
+    playBtn.textContent = "▶ Play";
 
     setEyeExpression("angry");
-  }
-});
-
-// ------------------- Autoplay on page load -------------------
-window.addEventListener("load", async () => {
-  if (!analyser) setupAudioNodes();
-  await ctx.resume();
-
-  try {
-    audio.muted = true;
-    await audio.play();
-    isPlaying = true;
-    playBtn.textContent = "⏸️ Pause Music";
-    updateAudioData();
-
-    setTimeout(() => {
-      audio.muted = false;
-    }, 500);
-  } catch (err) {
-    playBtn.textContent = "▶️ Play Music";
   }
 });
 

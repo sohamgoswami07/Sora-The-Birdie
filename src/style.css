@@ -1,3 +1,6 @@
+/* import Geist font (Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -9,22 +12,77 @@ body {
   height: 100dvh;
   width: 100dvw;
   overflow: hidden;
+  background: url("/figure/background.png") no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Geist", sans-serif;
+  font-weight: normal;
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2rem;
+  z-index: 10;
+}
+
+.logo img {
+  height: 7.5rem;
+  width: auto;
 }
 
 #audioControls {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1000;
-  padding: 8px 14px;
-  background: #222;
-  color: #fff;
+  position: absolute;
+  left: 50%;
+  bottom: 3rem;
+  transform: translateX(-50%);
+  padding: 0.6rem 2rem;
+  background: #ffffff;
+  color: #000000;
   border: none;
-  border-radius: 6px;
+  border-radius: 50px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1rem;
   outline: none;
+  z-index: 10;
+  font-weight: bolder;  
+  box-shadow: rgba(45, 35, 66, 0.2) 0 0px 4px,rgba(45, 35, 66, 0.15) 0 0px 13px -3px,#D6D6E7 0 -3px 0 inset;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  transition: box-shadow .5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow;
 }
+
+#audioControls:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.2) 0 2px 4px, rgba(45, 35, 66, 0.15) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
 #audioControls:hover {
-  background: #444;
+  box-shadow: rgba(45, 35, 66, 0.2) 0 4px 8px, rgba(45, 35, 66, 0.15) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+#audioControls:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+}
+
+.tags {
+  position: absolute;
+  font-size: 0.75rem;
+  bottom: 0.25rem;
+  left: 0;
+  padding: 0rem 2rem;
+  height: 2rem;
+  width: 100%;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tags a {
+  color: #000;
 }
