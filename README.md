@@ -4,6 +4,10 @@ The bird flaps, jumps, and changes expressions in sync with the beat of the back
 
 ---
 
+## Inspired From
+https://pablotheflamingo.com/
+---
+
 ## 🚀 Features
 - **Physics-driven bird** assembled from multiple body parts using [Matter.js](https://brm.io/matter-js/).
 - **Audio beat detection** using the Web Audio API for real-time frequency analysis.
